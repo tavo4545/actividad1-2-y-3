@@ -1,0 +1,39 @@
+#include <iostream>
+#include <cmath>
+using namespace std;
+
+int main() {
+    const double ladoCuadrado = 5.0; 
+    const double radioCirculo = 3.0;
+    const double baseTriangulo = 4.0;
+    const double alturaTriangulo = 6.0;
+    
+    int opcion;
+    double area;
+    
+    cout << "Calculadora de areas" << endl;
+    cout << "1. Area de un cuadrado" << endl;
+    cout << "2. Area de un circulo" << endl;
+    cout << "3. Area de un triangulo" << endl;
+    cout << "Ingrese una opcion (1, 2 o 3): ";
+    cin >> opcion;
+    
+    switch(opcion) {
+        case 1:
+            area = ladoCuadrado * ladoCuadrado;
+            cout << "El area del cuadrado con lado " << ladoCuadrado << " es: " << area << endl;
+            break;
+        case 2:
+            area = M_PI * pow(radioCirculo, 2);
+            cout << "El area del circulo con radio " << radioCirculo << " es: " << area << endl;
+            break;
+        case 3:
+            area = (baseTriangulo * alturaTriangulo) / 2;
+            cout << "El area del triangulo con base " << baseTriangulo << " y altura " << alturaTriangulo << " es: " << area << endl;
+            break;
+        default:
+            cout << "Opcion no valida. Por favor ingrese 1, 2 o 3." << endl;
+    }
+    
+    return 0;
+}
