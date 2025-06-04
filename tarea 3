@@ -1,0 +1,92 @@
+#include <iostream>
+#include <cmath>
+using namespace std;
+
+class Figura {
+protected:
+    const string nombre;
+
+public:
+    Figura(const string& nombre) : nombre(nombre) {}
+    virtual double calcularArea() const = 0; 
+    
+    void mostrarArea() const {
+        cout << "El área del " << nombre << " es: " << calcularArea() << endl;
+    }
+    
+    virtual ~Figura() {} 
+};
+
+class Cuadrado : public Figura {
+private:
+    const double lado;
+
+public:
+    Cuadrado(double lado) : Figura("cuadrado"), lado(lado) {}
+    
+    double calcularArea() const override {
+        return lado * lado;
+    }
+};
+
+class Circulo : public Figura {
+private:
+    const double radio;
+
+public:
+    Circulo(double radio) : Figura("círculo"), radio(radio) {}
+    
+    double calcularArea() const override {
+        return M_PI * radio * radio;
+    }
+};
+
+class Triangulo : public Figura {
+private:
+    const double base;
+    const double altura;
+
+public:
+    Triangulo(double base, double altura) : Figura("triángulo"), base(base), altura(altura) {}
+    
+    double calcularArea() const override {
+        return (base * altura) / 2.0;
+    }
+};
+
+int main() {
+    const double LADO = 5.0;
+    const double RADIO = 3.0;
+    const double BASE = 4.0;
+    const double ALTURA = 6.0;
+    
+    int opcion;
+    Figura* figura = nullptr;
+    
+    cout << "\nCalculadora de áreas (versión con herencia)" << endl;
+    cout << "1. Área de un cuadrado" << endl;
+    cout << "2. Área de un círculo" << endl;
+    cout << "3. Área de un triángulo" << endl;
+    cout << "Ingrese una opción (1, 2 o 3): ";
+    cin >> opcion;
+    
+    switch(opcion) {
+        case 1:
+            figura = new Cuadrado(LADO);
+            break;
+        case 2:
+            figura = new Circulo(RADIO);
+            break;
+        case 3:
+            figura = new Triangulo(BASE, ALTURA);
+            break;
+        default:
+            cout << "Opción no válida. Por favor ingrese 1, 2 o 3." << endl;
+            return 1;
+    }
+    
+    figura->mostrarArea();
+    delete figura;
+    
+    return 0;
+}
